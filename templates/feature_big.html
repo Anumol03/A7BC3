@@ -1,0 +1,29 @@
+{% load static %}
+ <!-- ***** Features Big Item Start ***** -->
+ <section class="section" id="about">
+    <div class="container">
+
+        <div class="row">
+            {% for i in services%}
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12"
+                data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
+                <div class="features-item">
+                    <div class="features-icon">
+                        
+                        <img src="{{i.images.url}}" alt="" width="300px;" height="230px;">
+                        <h4>{{i.name}}</h4>
+                        <p>new pulvinar vel odio sed sagittis. Nam maximus ex diam, nec consectetur diam.</p>
+                        <a href="{% url 'service_page' i.id%}" class="main-button">
+                            Read More
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+        {% endfor %}
+            
+        </div>
+    </div>
+</section>
+<div class="right-image-decor"></div>
+<!-- ***** Features Big Item End ***** -->

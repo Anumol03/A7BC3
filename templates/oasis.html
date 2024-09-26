@@ -1,7 +1,5 @@
-
 {% extends 'base.html' %}
-{% load static %}
-{% block title %} A7BC {% endblock %}
+{% block title %} {{ser.name}} {% endblock %}
 {% block content %}
 <!-- ***** Header Area Start ***** -->
 <header class="header-area header-sticky">
@@ -11,7 +9,7 @@
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a href="index.html" class="logo">
-                        <img src="{% static 'assets/images/A7logo1.jpeg' %}" height="60" width="130" style="border-radius: 6px;">
+                        <img src="{{ser.images.url}}" height="60" width="130" style="border-radius: 6px;">
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
@@ -41,10 +39,6 @@
     </div>
 </header>
 <!-- ***** Header Area End ***** -->
-
-{% include 'welcome_area.html' %}
-
-{% include 'feature_big.html' %}
 
 
 
