@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'spices',
+    'Fantastic_frames_app',
     
 ]
 
