@@ -18,11 +18,13 @@ from django.urls import path
 from myapp.views import *
 from django.conf import settings
 from django.conf.urls.static import static
+from spices.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
     path('services/<int:pk>/',services,name='service_page'),
+    path('spices/',spices,name='spices')
     
 ] 
 if settings.DEBUG:
