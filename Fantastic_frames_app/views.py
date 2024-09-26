@@ -4,4 +4,4 @@ from django.shortcuts import render
 
 
 def fantastic_home(request):
-    return render(request,'fantastic/fantastic_home.html')
+    return render(request,'fantastic/index.html')
