@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'myapp',
     'spices',
     'Fantastic_frames_app',
+    'oasis',
     
 ]
 

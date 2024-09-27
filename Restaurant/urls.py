@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from spices.views import *
 from Fantastic_frames_app import views as ff
+from oasis.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +28,7 @@ urlpatterns = [
     path('services/<int:pk>/',services,name='service_page'),
     path('spices/',spices,name='spices'),
     path('fantastic/',ff.fantastic_home,name='fantastic-home'),
+    path('oasis/',oasis1,name='oasis')
     
 ] 
 if settings.DEBUG:
