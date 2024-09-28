@@ -44,7 +44,53 @@
 
 {% include 'welcome_area.html' %}
 
-{% include 'feature_big.html' %}
+ <!-- ***** Features Big Item Start ***** -->
+<section class="section" id="about">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4"
+                data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
+                <div class="features-item stylish-card">
+                    <div class="features-icon">
+                        <img src="{% static 'images/oasis.jpeg' %}" alt="Oasis" class="img-fluid rounded-top">
+                        <h4 class="card-title">Oasis</h4>
+                        <p class="card-description">We connect exceptional talent with leading organizations to create successful partnerships. Our dedicated team specializes in understanding both client needs and candidate aspirations. Let us help you build your dream team and unlock new opportunities!</p>
+                        <a href="{% url 'oasis' %}" class="main-button stylish-button">Visit</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4"
+                data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
+                <div class="features-item stylish-card">
+                    <div class="features-icon">
+                        <img src="{% static 'images/b3e82bb8-182f-4e53-8642-7bbd49f2f532.jpg' %}" alt="Fantastic Frames" class="img-fluid rounded-top">
+                        <h4 class="card-title">Fantastic Frames</h4>
+                        <p class="card-description">Fantastic Frames is your go-to destination for exquisite photo framing and personalized art solutions. We take pride in preserving your cherished memories with our wide range of high-quality frames, stylish mounts, and expert craftsmanship. Whether you're looking to frame family portraits, artwork, or special moments, our dedicated team is here to help you create stunning displays that enhance your home or office décor.</p>
+                        <a href="{% url 'fantastic-home' %}" class="main-button stylish-button">Visit</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4"
+                data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
+                <div class="features-item stylish-card">
+                    <div class="features-icon">
+                        <img src="{% static 'gc/images/green_chillies.jpeg' %}" alt="Green Chillies" class="img-fluid rounded-top">
+                        <h4 class="card-title">Green Chillies</h4>
+                        <p class="card-description">Green Chillies offers a vibrant dining experience featuring a unique blend of traditional and contemporary flavors. Specializing in spicy, aromatic dishes, our menu showcases the finest ingredients crafted into mouthwatering culinary delights. Join us for a memorable meal where every bite tells a story and every visit feels like home!</p>
+                        <a href="{% url 'green-chillies' %}" class="main-button stylish-button">Visit</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="right-image-decor"></div>
+<!-- ***** Features Big Item End ***** -->
 
 
 

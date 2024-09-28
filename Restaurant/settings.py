@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'spices',
     'Fantastic_frames_app',
     'oasis',
+    'green_chillies',
     
 ]
 

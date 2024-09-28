@@ -2290,6 +2290,10 @@ ul {
   }
 }
 
+.main_menu{
+    background-color:#ff4c04;
+}
+
 /* line 36, ../../01 cl html template/187 Shotgear Photography/187 Shotgear Photography Html/sass/_menu.scss */
 .main_menu .active_color {
   color: #282828 !important;

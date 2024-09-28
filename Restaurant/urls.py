@@ -20,17 +20,19 @@ from django.conf import settings
 from django.conf.urls.static import static
 from spices.views import *
 from Fantastic_frames_app import views as ff
+from green_chillies import views as gc
 from oasis.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
-    path('services/<int:pk>/',services,name='service_page'),
-    path('spices/',spices,name='spices'),
-    path('fantastic/',ff.fantastic_home,name='fantastic-home'),
-    path('oasis/',oasis1,name='oasis')
-    
-] 
+    path('services/<int:pk>/', services, name='service_page'),
+    path('spices/', spices, name='spices'),
+    path('fantastic/', ff.fantastic_home, name='fantastic-home'),
+    path('oasis/', oasis1, name='oasis'),
+    path('green-chillies/', gc.green_chillies_home, name='green-chillies'),
+
+]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

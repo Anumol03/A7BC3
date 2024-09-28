@@ -87,3 +87,62 @@
 
 }
 
+/* Main container */
+.section {
+    padding: 60px 0;
+    background-color: #f8f9fa; /* Light background color */
+}
+
+/* Card styles */
+.stylish-card {
+    background-color: #ffffff; /* White background for cards */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    overflow: hidden; /* Prevent overflow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+    height:700px;
+}
+
+.stylish-card:hover {
+    transform: translateY(-5px); /* Raise on hover */
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Image styles */
+.features-icon img {
+    width: 100%; /* Full width */
+    height: 310px; /* Maintain aspect ratio */
+}
+
+/* Title styles */
+.card-title {
+    font-size: 1.5rem;
+    color: #343a40; /* Darker text color */
+    margin: 15px 0 10px; /* Margin adjustments */
+}
+
+/* Description styles */
+.card-description {
+    font-size: 1rem;
+    color: #6c757d; /* Gray color */
+    margin-bottom: 20px; /* Space below */
+    height: 80px; /* Set height to avoid card size increase */
+    overflow: hidden; /* Prevent overflow */
+}
+
+/* Button styles */
+.stylish-button {
+    display: inline-block;
+    padding: 10px 20px; /* Padding for button */
+    background-color: #007bff; /* Primary button color */
+    color: #ffffff; /* White text */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transition for hover */
+}
+
+.stylish-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow on hover */
+}
+
