@@ -100,7 +100,7 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     overflow: hidden; /* Prevent overflow */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
-    height:700px;
+    height:670px;
 }
 
 .stylish-card:hover {
@@ -111,7 +111,7 @@
 /* Image styles */
 .features-icon img {
     width: 100%; /* Full width */
-    height: 310px; /* Maintain aspect ratio */
+    height: 300px; /* Maintain aspect ratio */
 }
 
 /* Title styles */
@@ -126,7 +126,7 @@
     font-size: 1rem;
     color: #6c757d; /* Gray color */
     margin-bottom: 20px; /* Space below */
-    height: 80px; /* Set height to avoid card size increase */
+    height: 70px; /* Set height to avoid card size increase */
     overflow: hidden; /* Prevent overflow */
 }
 
