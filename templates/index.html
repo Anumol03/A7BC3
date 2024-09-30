@@ -3,6 +3,145 @@
 {% load static %}
 {% block title %} A7BC {% endblock %}
 {% block content %}
+
+<style>
+
+    #download-csv {
+        position: fixed;
+        top: 20px; /* Adjust as needed */
+        right: 20px; /* Adjust as needed */
+        z-index: 1000; /* Ensure it's on top */
+        background-color: #007bff; /* Stylish button color */
+        color: white; /* Text color */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    #download-csv:hover {
+        background-color: #0056b3; /* Darker color on hover */
+    }
+
+    .success-popup {
+        position: fixed;
+        top: 50px; /* Adjust to show below the button */
+        right: 20px; /* Align with the button */
+        background-color: rgba(0, 128, 0, 0.8); /* Green background */
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        animation: fadeIn 0.3s, fadeOut 0.3s 2s forwards; /* Animation */
+        z-index: 1001; /* Ensure it appears above other content */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+    /* The overall container of the popup */
+    .popup-message {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: slideIn 0.5s ease-in-out;  /* Slide-in animation */
+    }
+
+    /* Inner content of the popup */
+    .popup-content {
+        padding: 20px 30px;
+        background-color: #4CAF50;  /* Green background for success */
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Drop shadow */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        transform: scale(1);
+        animation: scaleUp 0.3s ease-in-out forwards;  /* Scale-up animation */
+    }
+
+    /* Icon inside the popup */
+    .popup-content i {
+        font-size: 24px;
+        margin-right: 10px;
+        color: yellow;
+        animation: pulse 1s infinite;  /* Pulsing effect for the check icon */
+    }
+
+    /* Slide-in animation for the popup container */
+    @keyframes slideIn {
+        0% {
+            transform: translateX(-100%);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    /* Scale-up animation for the popup content */
+    @keyframes scaleUp {
+        0% {
+            transform: scale(0.8);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    /* Pulsing animation for the icon */
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.2);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+</style>
+
+
+<style>
+
+    /* Styling for the WhatsApp button */
+    .whatsapp-sticker {
+        position: fixed;
+        bottom: 20px; /* Distance from the bottom of the screen */
+        left: 20px; /* Distance from the left of the screen */
+        z-index: 1000; /* Ensures the button is above other elements */
+        display: block;
+        width: 60px;
+        height: 60px;
+        background-color: #25D366; /* WhatsApp green color */
+        border-radius: 50%;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        line-height: 60px;
+    }
+    .whatsapp-sticker img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+</style>
+
+
 <!-- ***** Header Area Start ***** -->
 <header class="header-area header-sticky">
     <div class="container">
@@ -104,8 +243,76 @@
 <!-- ***** Features Big Item End ***** -->
  {% include 'testimonal.html' %}
 
+<button id="download-csv">Download CSV</button>
+<!-- WhatsApp Sticker Button -->
+<a href="https://web.whatsapp.com/send?phone=9526701403&text=Hello!%20How%20are%20you?"
+   class="whatsapp-sticker"
+   target="_blank">
+    <img src="{% static 'assets/images/wpicon.png' %}" alt="WhatsApp" height="60" width="60">
+</a>
 
 
+
+<!-- ***** JavaScript for Mobile WhatsApp Handling ***** -->
+<script>
+    document.querySelector('.whatsapp-sticker').addEventListener('click', function(e) {
+        e.preventDefault();
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+        // Check if the device is an Android, iPhone or iPad
+        if (/android/i.test(userAgent) || /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            window.location.href = "whatsapp://send?phone=9526701403&text=Hello!%20How%20are%20you?";
+        } else {
+            // For desktops
+            window.open("https://web.whatsapp.com/send?phone=9526701403&text=Hello!%20How%20are%20you?", "_blank");
+        }
+    });
+</script>
+<!-- Add this script at the bottom of your HTML file -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const downloadButton = document.getElementById('download-csv');
+
+        downloadButton.addEventListener('click', function() {
+            fetch("{% url 'download_email_list_csv' %}")
+                .then(response => {
+                    if (response.ok) {
+                        // Create a Blob from the response and create a download link
+                        return response.blob();
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = 'email_list.csv'; // Specify the name for the downloaded file
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+
+                    // Show success popup
+                    showSuccessPopup("Download CSV completed!");
+                })
+                .catch(error => console.error('There was a problem with the fetch operation:', error));
+        });
+    });
+
+    function showSuccessPopup(message) {
+        const popup = document.createElement('div');
+        popup.className = 'success-popup';
+        popup.innerText = message;
+        document.body.appendChild(popup);
+
+        setTimeout(() => {
+            popup.style.opacity = '0';
+            setTimeout(() => {
+                document.body.removeChild(popup);
+            }, 300); // Wait for the fade-out transition
+        }, 2000); // Display for 2 seconds
+    }
+</script>
 
 
 

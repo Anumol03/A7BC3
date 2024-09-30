@@ -33,6 +33,7 @@ https://templatemo.com/tm-540-lava-landing-page
     {% block head %}
     {% endblock %}
 
+
 </head>
 
 <body>
@@ -72,7 +73,8 @@ https://templatemo.com/tm-540-lava-landing-page
                     <!-- ***** Contact Form Start ***** -->
                     <div class="col-lg-6 col-md-12 col-sm-12">
                         <div class="contact-form">
-                            <form id="contact" action="" method="post">
+                            <form id="contact-form" action="" method="post">
+                                {% csrf_token %}
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <fieldset>
@@ -154,6 +156,76 @@ At A7BC, we believe in quality, creativity, and the pursuit of excellence. Join 
 
     <!-- Global Init -->
     <script src="{%static 'assets/js/custom.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#contact-form').on('submit', function(e) {
+            e.preventDefault();  // Prevent page refresh
+
+            $.ajax({
+                url: '{% url "submit_contact_form" %}',  // Adjust URL to match your route
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    if(response.status === 'success') {
+                        // Create the popup
+                        $('body').append(`
+                            <div class="popup-message">
+                                <div class="popup-content">
+                                    <i class="fa fa-check-circle"></i>
+                                    <p style="color:white;">${response.message}</p>
+                                </div>
+                            </div>
+                        `);
+
+                        // Make the popup disappear after 3 seconds
+                        setTimeout(function() {
+                            $('.popup-message').fadeOut(500, function() {
+                                $(this).remove();
+                            });
+                        }, 3000);
+
+                        // Clear the form fields
+                        $('#name').val('');
+                        $('#email').val('');
+                        $('#message').val('');
+                    } else {
+                        alert(response.message);  // Handle error cases
+                    }
+                },
+                error: function() {
+                    alert('An error occurred. Please try again.');
+                }
+            });
+        });
+    });
+</script>
+
+
+<script>
+// Add CSRF token to all AJAX requests
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        if (!/^(GET|HEAD|OPTIONS|TRACE)$/.test(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+        }
+    }
+});
+</script>
 
 </body>
 </html>

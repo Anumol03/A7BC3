@@ -26,6 +26,8 @@ from oasis.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
+    path('download-email-list-csv/', download_email_list_csv, name='download_email_list_csv'),
+    path('submit-contact/', submit_contact_form, name='submit_contact_form'),
     path('services/<int:pk>/', services, name='service_page'),
     path('spices/', spices, name='spices'),
     path('fantastic/', ff.fantastic_home, name='fantastic-home'),
