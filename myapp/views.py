@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse,redirect
 from .models import *
 from django.http import JsonResponse
 import csv
@@ -6,7 +6,8 @@ from django.http import HttpResponse
 from .models import Email_List
 from django.contrib.auth.decorators import user_passes_test
 from datetime import datetime
-
+from django.contrib.auth import authenticate, login,logout
+from django.contrib import messages
 def index(request):
     service = Services.objects.all()
     return render(request, 'index.html', {"services": service})
@@ -47,3 +48,26 @@ def download_email_list_csv(request):
         writer.writerow(email)
 
     return response
+
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            messages.success(request, 'Login successful!')
+            return redirect('index')  # Redirect to the home page or another page
+        else:
+            messages.error(request, 'Invalid username or password')
+            return redirect('login')
+
+    return render(request, 'login.html')
+
+
+def user_logout(request):
+    logout(request)  # This will log the user out
+    messages.success(request, 'You have been logged out.')
+    return redirect('index')  # Redirect to the login page or another page

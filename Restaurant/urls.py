@@ -33,6 +33,8 @@ urlpatterns = [
     path('fantastic/', ff.fantastic_home, name='fantastic-home'),
     path('oasis/', oasis1, name='oasis'),
     path('green-chillies/', gc.green_chillies_home, name='green-chillies'),
+    path('login/', user_login, name='login'),
+    path('logout/', user_logout, name='logout'),
 
 ]
 if settings.DEBUG:
