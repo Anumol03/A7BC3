@@ -26,6 +26,16 @@
     <link rel="stylesheet" href="{% static 'fantastic/css/slick.css' %}">
     <!-- style CSS -->
     <link rel="stylesheet" href="{% static 'fantastic/css/style.css' %}">
+    <style>
+                li {
+            text-align: justify; /* Justify text */
+            margin-bottom: 15px; /* Space between list items */
+            font-size: 14px; /* Adjust font size as needed */
+            line-height: 1.6; /* Improve readability */
+            color:grey;
+            font-family: 'Verdana', sans-serif;
+        }
+    </style>
 </head>
 
 <body>
@@ -35,7 +45,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.html"> <img src="{% static 'images\b3e82bb8-182f-4e53-8642-7bbd49f2f532.jpg' %}" alt="logo" style="height: 70px; width: 100px;border:4px double black;border-radius:10px;"> </a>
+                        <a class="navbar-brand" href="{% url 'index' %}"> <img src="{% static 'images\b3e82bb8-182f-4e53-8642-7bbd49f2f532.jpg' %}" alt="logo" style="height: 70px; width: 100px;border:4px double black;border-radius:10px;"> </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -45,23 +55,23 @@
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">Home</a>
+                                    <a class="nav-link" href="{% url 'index' %}">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about.html">about</a>
+                                    <a class="nav-link" href="#abt">about</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="services.html">services</a>
+                                    <a class="nav-link" href="#ser">services</a>
                                 </li>
 
 
-                                <li class="nav-item ">
-                                    <a class="nav-link " href=""
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        story
-                                    </a>
+<!--                                <li class="nav-item ">-->
+<!--                                    <a class="nav-link " href=""-->
+<!--                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                                        story-->
+<!--                                    </a>-->
 
-                                </li>
+<!--                                </li>-->
 
                                 <!-- <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown"
@@ -83,7 +93,7 @@
                                     </div>
                                 </li> -->
                                 <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">contact</a>
+                                    <a class="nav-link" href="#foot">contact</a>
                                 </li>
                             </ul>
                         </div>
@@ -125,21 +135,25 @@
     <!--::banner part start::-->
 
     <!--::about_us part start::-->
-    <section class="about_us padding_top">
+    <section class="about_us padding_top" id="abt">
         <div class="container">
             <div class="row align-items-center justify-content-center">
-                <div class="col-lg-8">
+                <div class="col-lg-8" >
                     <div class="about_us_text text-center">
                         <h5>About our studio</h5>
-                        <h2>The Camera Is An Instrument That Teaches People
-                            how to See without a Camera</h2>
-                        <p>It’s the end of summer the sweltering heat makes human
-                            sweat in the night and makes the plants and trees wilt
-                            even in the moonlit nights. The eastern wind breeze brings
-                            an eerie feeling, that the monsoon clouds are soon coming,
-                            there is a strange silence in the ears, the sky gets darker
-                            and darker, the flash of lightning illuminates the dark skies,
-                            the sound of thunder fills the heart with fear.</p>
+                        <h2>Welcome to Fantastic Frames!
+                            At Fantastic Frames</h2>
+                        <p>
+
+We believe that every photograph tells a unique story, and our mission is to help you showcase those stories in the most beautiful and elegant way possible. Whether you’re looking to frame a cherished family photo, a stunning piece of art, or a memorable moment captured on camera, we have the perfect solution for you.
+
+Our Services:
+
+<li>Custom Photo Frames: Choose from a wide variety of frame styles, materials, and finishes to perfectly complement your photos and artwork. Our expert framers will craft each frame with precision and care.</li>
+<li>Photography Services: Capture your special moments with our professional photography services. From family portraits to event photography, we ensure high-quality images that you’ll treasure forever.</li>
+<li>Canvas Prints: Turn your favorite photos into beautiful canvas prints. Our high-quality printing process ensures vibrant colors and sharp details, making your images look like works of art.</li>
+<li>Digital Image Printing: Upload your digital images, and we’ll print and frame them for you. Our user-friendly platform makes it easy to customize your order and preview your final product.</li>
+                        </p>
                         <a href="#" class="btn_2">read more</a>
                     </div>
                 </div>
@@ -249,7 +263,7 @@
     <!-- gallery_part part end-->
 
     <!--::our_service part start::-->
-    <section class="our_service padding_bottom">
+    <section class="our_service padding_bottom" id="ser">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
@@ -483,19 +497,19 @@
 
 
     <!--::footer_part start::-->
-    <footer class="footer-area">
+    <footer class="footer-area" id="foot">
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col-sm-6 col-md-6 col-lg-3">
                     <div class="single-footer-widget">
                         <h4>Our Service</h4>
                         <ul>
-                            <li><a href="#">Car accident</a></li>
-                            <li><a href="#">Personal injury</a></li>
-                            <li><a href="#">Family law</a></li>
-                            <li><a href="#">Bank and financial</a></li>
-                            <li><a href="#">Capital market</a></li>
-                            <li><a href="#">Employment Law</a></li>
+                            <li><a href="#">Custom framing</a></li>
+                            <li><a href="#">Handcrafted frames</a></li>
+                            <li><a href="#">Wide selection of custom frames & prints</a></li>
+<!--                            <li><a href="#">Bank and financial</a></li>-->
+<!--                            <li><a href="#">Capital market</a></li>-->
+<!--                            <li><a href="#">Employment Law</a></li>-->
                         </ul>
 
                     </div>

@@ -35,6 +35,8 @@ urlpatterns = [
     path('green-chillies/', gc.green_chillies_home, name='green-chillies'),
     path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),
+    path('create-reservation/', gc.create_reservation, name='create_reservation'),
+    path('download_reservations/', gc.download_reservations, name='download_reservations'),
 
 ]
 if settings.DEBUG:

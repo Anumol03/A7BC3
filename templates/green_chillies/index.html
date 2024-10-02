@@ -23,6 +23,9 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css' %}" />
   <!-- nice select  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css' %}" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
   <!-- font awesome style -->
   <link href="{% static 'gc/css/font-awesome.min.css' %}" rel="stylesheet" />
 
@@ -30,6 +33,19 @@
   <link href="{% static 'gc/css/style.css' %}" rel="stylesheet" />
   <!-- responsive style -->
   <link href="{% static 'gc/css/responsive.css' %}" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <style>
+            .download-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+  </style>
 
 </head>
 
@@ -43,7 +59,7 @@
     <header class="header_section">
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="{% url 'green-chillies' %}">
             <span>
               Restaurants
             </span>
@@ -56,16 +72,16 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  mx-auto ">
               <li class="nav-item active">
-                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="menu.html">Menu</a>
+                <a class="nav-link" href="#men">Menu</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="about.html">About</a>
+                <a class="nav-link" href="#abt">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="book.html">Book Table</a>
+                <a class="nav-link" href="#cnt">Contact</a>
               </li>
             </ul>
             <div class="user_option">
@@ -156,8 +172,8 @@
                       Craving something delicious? Dive into our mouth-watering fast food, made fresh and served fast. Your taste buds will thank you!
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn1">
-                        Order Now
+                      <a href="#ord" class="btn1">
+                        Book Now
                       </a>
                     </div>
                   </div>
@@ -227,7 +243,7 @@
     <div class="offer_container">
       <div class="container ">
         <div class="row">
-          <div class="col-md-6  ">
+          <div class="col-md-6  " id="men">
             <div class="box ">
               <div class="img-box">
                 <img src="{% static 'gc/images/o1.jpg' %}" alt="">
@@ -919,7 +935,7 @@
     <div class="container  ">
 
       <div class="row">
-        <div class="col-md-6 ">
+        <div class="col-md-6 " id="abt">
           <div class="img-box">
             <img src="{% static 'gc/images/about-img.png' %}" alt="">
           </div>
@@ -953,7 +969,7 @@
   <!-- end about section -->
 
   <!-- book section -->
-  <section class="book_section layout_padding">
+  <section class="book_section layout_padding" id="ord">
     <div class="container">
       <div class="heading_container">
         <h2>
@@ -963,44 +979,36 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form_container">
-            <form action="">
-              <div>
-                <input type="text" class="form-control" placeholder="Your Name" />
-              </div>
-              <div>
-                <input type="text" class="form-control" placeholder="Phone Number" />
-              </div>
-              <div>
-                <input type="email" class="form-control" placeholder="Your Email" />
-              </div>
-              <div>
-                <select class="form-control nice-select wide">
-                  <option value="" disabled selected>
-                    How many persons?
-                  </option>
-                  <option value="">
-                    2
-                  </option>
-                  <option value="">
-                    3
-                  </option>
-                  <option value="">
-                    4
-                  </option>
-                  <option value="">
-                    5
-                  </option>
-                </select>
-              </div>
-              <div>
-                <input type="date" class="form-control">
-              </div>
-              <div class="btn_box">
-                <button>
-                  Book Now
-                </button>
-              </div>
+            <form id="bookingForm">
+                <div>
+                    <input type="text" class="form-control" placeholder="Your Name" id="name" required />
+                </div>
+                <div>
+                    <input type="text" class="form-control" placeholder="Phone Number" id="phone" required />
+                </div>
+                <div>
+                    <input type="email" class="form-control" placeholder="Your Email" id="email" required />
+                </div>
+                <div>
+                    <select class="form-control nice-select wide" id="persons" required>
+                        <option value="" disabled selected>How many persons?</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="date" class="form-control" id="date" required>
+                </div>
+                <div>
+                    <input type="text" class="form-control" id="time" placeholder="Select Time" required>
+                </div>
+                <div class="btn_box">
+                    <button type="submit">Book Now</button>
+                </div>
             </form>
+
           </div>
         </div>
         <div class="col-md-6">
@@ -1012,7 +1020,9 @@
     </div>
   </section>
   <!-- end book section -->
-
+  {% if request.user.is_authenticated %}
+  <button class="download-btn" onclick="downloadReservations()">Download Orders</button>
+  {% endif %}
   <!-- client section -->
 
 <!--  <section class="client_section layout_padding-bottom">-->
@@ -1068,7 +1078,7 @@
   <!-- end client section -->
 
   <!-- footer section -->
-  <footer class="footer_section">
+  <footer class="footer_section" id="cnt">
     <div class="container">
       <div class="row">
         <div class="col-md-4 footer-col">
@@ -1168,6 +1178,80 @@
   <!-- Google Map -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
   </script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Initialize Flatpickr for the time field
+    flatpickr("#time", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        minTime: "07:30",
+        maxTime: "22:30"
+    });
+
+    $('#bookingForm').on('submit', function(event) {
+        event.preventDefault();
+
+        const formData = {
+            name: $('#name').val(),
+            phone: $('#phone').val(),
+            email: $('#email').val(),
+            persons: $('#persons').val(),
+            date: $('#date').val(),
+            time: $('#time').val()  // Include the time field
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/create-reservation/', // Replace with your backend endpoint
+            data: JSON.stringify(formData),
+            contentType: 'application/json',
+            success: function(response) {
+                toastr.success('Booked successfully!');
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+                $('#bookingForm')[0].reset();
+            },
+            error: function(error) {
+                toastr.error('Something went wrong. Please try again.');
+            }
+        });
+    });
+});
+</script>
+
+<script>
+    function downloadReservations() {
+        fetch('/download_reservations/')
+            .then(response => {
+                if (response.ok) {
+                    return response.blob();
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'reservations.csv';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                alert('Download successful!');
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
+</script>
+
   <!-- End Google Map -->
 
 </body>
