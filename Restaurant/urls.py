@@ -32,6 +32,7 @@ urlpatterns = [
     path('spices/', spices, name='spices'),
     path('fantastic/', ff.fantastic_home, name='fantastic-home'),
     path('oasis/', oasis1, name='oasis'),
+    path('save-email/', save_email_oasis, name='save_email'),
     path('green-chillies/', gc.green_chillies_home, name='green-chillies'),
     path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),

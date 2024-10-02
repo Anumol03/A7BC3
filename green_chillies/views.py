@@ -5,7 +5,7 @@ from .models import *
 import json
 import csv
 from django.http import HttpResponse
-
+from datetime import datetime
 
 # Create your views here.
 
@@ -34,18 +34,23 @@ def create_reservation(request):
 
 
 def download_reservations(request):
-    # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="reservations.csv"'
 
     writer = csv.writer(response)
     writer.writerow(['Name', 'Phone Number', 'Email', 'Number of Persons', 'Reservation Date', 'Reservation Time'])
 
-    # Order by reservation_date and reservation_time
     reservations = Reservation.objects.all().order_by('reservation_date', 'reservation_time')
     for reservation in reservations:
-        formatted_date = reservation.reservation_date.strftime('%Y-%m-%d') if reservation.reservation_date else ''
-        formatted_time = reservation.reservation_time.strftime('%H:%M:%S') if reservation.reservation_time else ''
-        writer.writerow([reservation.name, reservation.phone_number, reservation.email, reservation.number_of_persons, formatted_date, formatted_time])
+        formatted_date = f"'{reservation.reservation_date.strftime('%d-%m-%Y')}" if reservation.reservation_date else ''
+        formatted_time = reservation.reservation_time.strftime('%H:%M') if reservation.reservation_time else ''
+        writer.writerow([
+            reservation.name,
+            reservation.phone_number,
+            reservation.email,
+            reservation.number_of_persons,
+            formatted_date,
+            formatted_time
+        ])
 
     return response

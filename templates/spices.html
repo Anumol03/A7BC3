@@ -28,6 +28,10 @@
       <link rel="stylesheet" href="{%static 'css/jquery.mCustomScrollbar.min.css' %}">
       <!-- Tweaks for older IEs-->
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
    </head>
    <body>
       <div class="header_section">
@@ -40,7 +44,7 @@
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto">
                      <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="#new">Products</a>
@@ -382,8 +386,8 @@
                      </ul>
                   </div>
                   <div class="form-group">
-                     <textarea class="update_mail" placeholder="Your Email" rows="5" id="comment" name="Your Email"></textarea>
-                     <div class="subscribe_bt"><a href="#"><i class="fa fa-arrow-right" aria-hidden="true"></i></a></div>
+                     <textarea class="update_mail" placeholder="Your Email" rows="5" id="email" name="Your Email"></textarea>
+                     <div class="subscribe_bt"><button style="padding:16px;background-color:red;color:white;border-radius:8px;margin-left:4px;" onclick="submitForm()">sent</button></div>
                   </div>
                </div>
             </div>
@@ -411,5 +415,57 @@
       <!-- sidebar -->
       <script src="{%static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
       <script src="{%static 'js/custom.js' %}"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+      <script>
+$(document).ready(function() {
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
+});
+</script>
+
+<script>
+function submitForm() {
+    const emailInput = document.getElementById('email');
+    const email = emailInput.value;
+
+    fetch('/save-email/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: `email=${encodeURIComponent(email)}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message) {
+            toastr.success(data.message);
+            emailInput.value = ''; // Clear the form field
+        } else {
+            toastr.error('An error occurred. Please try again.');
+        }
+    })
+    .catch(error => {
+        toastr.error('An error occurred. Please try again.');
+        console.error('Error:', error);
+    });
+}
+</script>
    </body>
 </html>
