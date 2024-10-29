@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 def index(request):
     service = Services.objects.all()
-    return render(request, 'index.html', {"services": service})
+    return render(request, 'new_index.html', {"services": service})
 
 
 def submit_contact_form(request):
